@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+	<Dialog draggable="true" resizable="true" horizontalScrolling="false" id="idDialogAssignPODetails" title="{i18n>poAssignment}" type="Standard">
+		<content>
+			<l:VerticalLayout width="100%" id="layout0">
+				<l:content>
+					<form:SimpleForm editable="true" layout="ColumnLayout" id="form0" columnsM="2" columnsL="2" columnsXL="2">
+						<form:content>
+							<Label text="{i18n>name}"/>
+							<Input id="inputNameId" placeholder="Enter Name"/>
+							<Label text="{i18n>phoneNumber}"/>
+							<Input id="inputPhoneNumId" type="Number" placeholder="Enter Phone Number"/>
+							<Label text="{i18n>eMail}"/>
+							<Input id="inputEmailId" type="Email" placeholder="Enter Email"/>
+							<Label text="{i18n>spslInst}"/>
+							<TextArea id="spslInstId" maxLength="200"/>
+						</form:content>
+					</form:SimpleForm>
+				</l:content>
+			</l:VerticalLayout>
+			<l:VerticalLayout width="100%" id="layout1">
+				<l:content>
+					<form:SimpleForm editable="true" id="cFragmentMyform" layout="ResponsiveGridLayout" columnsM="2" columnsL="2" columnsXL="2">
+						<form:content>
+							<core:Title text="{i18n>packDetails}"/>
+							<Label text="{i18n>packagingInfo}"/>
+							<Input id="inputPackInfo" required="true"/>
+							<Label text="{i18n>packageType}"/>
+							<ComboBox id="inputPackType" showSecondaryValues="true" required="true"/>
+							<Label text="{i18n>packageQty}"/>
+							<Input id="inputPackQty" type="Number" required="true"/>
+							<Label text="{i18n>dimensions}"/>
+							<Input id="inputLength" type="Number" required="true">
+							</Input>
+							<Input id="inputWidth" type="Number" required="true">
+							</Input>
+							<Input id="inputHeight" type="Number" required="true">
+							</Input>
+							<ComboBox id="inputDimUnitId" showSecondaryValues="true" required="true">
+								<layoutData>
+									<form:ColumnElementData cellsSmall="2" cellsLarge="1"/>
+								</layoutData>
+							</ComboBox>
+							<Label text="{i18n>weight}"/>
+							<Input id="inputWeight" type="Number" required="true"/>
+							<ComboBox id="InputWeightUnit" showSecondaryValues="true" required="true">
+								<layoutData>
+									<form:ColumnElementData cellsSmall="2" cellsLarge="1"/>
+								</layoutData>
+							</ComboBox>
+							<core:Title text="{i18n>pickUpDetails}"/>
+							<Label text="{i18n>pickupLoc}"/>
+							<Select id="inputLoc" required="true"/>
+							<Label text="{i18n>pickupdate}"/>
+							<DatePicker id="inputDate" valueFormat="MM/dd/yyyy HH:mm" displayFormat="MM/dd/yyyy HH:mm" required="true"/>
+						</form:content>
+						<form:title>
+							<core:Title text="{i18n>poDetails}" id="title15"/>
+						</form:title>
+					</form:SimpleForm>
+				</l:content>
+			</l:VerticalLayout>
+		</content>
+		<buttons>
+			<Button id="idButtonCancel" press="onAssignDialogCancelClick" text="{i18n>reject}" type="Reject"/>
+			<Button id="idButtonAccept" press="onAssignDialogAcceptClick" text="{i18n>accept}" type="Accept"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

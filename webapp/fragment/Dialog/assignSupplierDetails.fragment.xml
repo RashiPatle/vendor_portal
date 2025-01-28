@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:CD="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog id="idDialogAssignPODetails" title="{i18n>supplierDetails}">
+			        <form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0">
+			            <form:content>
+			                <Label id="_IDGenLabel1" text="{i18n>name}"/>
+							<Input width="100%" id="inputName" placeholder="Enter Name" value="{SupplierName}"/>
+							<Label id="_IDGenLabel2" text="{i18n>phoneNumber}"/>
+							<Input width="100%" id="inputPhoneNum" type="Number" placeholder="Enter Phone Number" value="{SupplierNumber}"/>
+							<Label id="_IDGenLabel3" text="{i18n>eMail}"/>
+							<Input width="100%" id="inputEmail" type="Email" placeholder="Enter Email" value="{SupplierContact}"/>
+							<Label text="{i18n>spslInst}"/>
+							<TextArea id="spslInstId" value="{SpecialInstructions}" editable="{FreightUnitEditFlag}" maxLength="200"/>
+						</form:content>
+			        </form:SimpleForm>
+		<beginButton>
+			<Button id="idButtonAccept" press="onAssignDialogAcceptClick" text="{i18n>accept}" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button id="idButtonCancel" press="onAssignDialogCancelClick" text="{i18n>reject}" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

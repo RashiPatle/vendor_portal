@@ -1,0 +1,199 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:m="sap.m"
+	xmlns:unified="sap.ui.unified"
+	xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:t="sap.ui.table"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" core:require="{ DecimalFormat: 'ui/tm/vps/ztmvpsintutive/model/DecimalFormat' }">
+	<t:Table id="idPOTable" enableGrouping="true" selectionMode="Multi" visibleRowCountMode="Auto" enableColumnFreeze="true" rowSelectionChange="onRowSelect">
+		<t:columns>
+			<t:Column id="_IDGenColumn7" width="4rem">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "Split"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel7" text=""/>
+				<t:template>
+					<m:Button id="idSplitTable" icon="sap-icon://split" press="onSplitPress" tooltip="{i18n>split}" enabled="true"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn1" width="7rem" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "PurchaseOrder" , "leadingProperty":"PurchaseOrder"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel1" text="{i18n>purchaseOrder}"/>
+				<t:template>
+					<m:ObjectIdentifier id="_IDGenObjectIdentifier1" title="{PurchaseOrder}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn8" width="20rem" sortProperty="ProductName" filterProperty="ProductName">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ProductName" , "leadingProperty":"ProductName"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel8" text="{i18n>productDesc}"/>
+				<t:template>
+					<m:Text id="_IDGenText7" text="{ProductName}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn4" width="5rem" sortProperty="ItemQuantity" filterProperty="ItemQuantity" hAlign="Center">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemQuantity" , "leadingProperty":"ItemQuantity"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel4" text="{i18n>quantity}"/>
+				<t:template>
+					<m:ObjectNumber id="_IDGenObjectNumber1" number="{ItemQuantity}" unit="{ItemQuantityUnit}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn9" width="16rem" sortProperty="ItemLength" filterProperty="ItemLength">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemLength"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel9" text="{i18n>dimensions}" required="true"/>
+				<t:template >
+					<m:HBox id="_IDGenHBox1">
+						<m:Input id="lengthId" value="{path: 'ItemLength', type: 'DecimalFormat'}" type="Number" editable="{FreightUnitEditFlag}" required="true"/>
+						<m:Input id="widthId" value="{path: 'ItemWidth', type: 'DecimalFormat'}" type="Number" editable="{FreightUnitEditFlag}" required="true"/>
+						<m:Input id="heightId" value="{path: 'ItemHeight', type: 'DecimalFormat'}" type="Number" editable="{FreightUnitEditFlag}" required="true"/>
+						<m:ComboBox id="_IDGenComboBox1" selectedKey="{ItemLengthUnit}" showSecondaryValues="true" enabled="{FreightUnitEditFlag}" required="true" items="{ path: '/C_ProductLengthUoMVH', templateShareable:false, sorter: { path: 'UnitOfMeasure' }}">
+							<core:ListItem id="_IDGenListItem1" key="{UnitOfMeasure}" text="{UnitOfMeasure}" additionalText="{UnitOfMeasure_Text}"/>
+						</m:ComboBox>
+					</m:HBox>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn10" width="9rem" sortProperty="ItemWeight" filterProperty="ItemWeight">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemWeight" , "leadingProperty":"ItemWeight"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel10" text="{i18n>weight}" required="true"/>
+				<t:template>
+					<m:HBox id="_IDGenHBox2">
+						<m:Input id="weightId" value="{path: 'ItemWeight', type: 'DecimalFormat'}" type="Number" editable="{FreightUnitEditFlag}" required="true"/>
+						<m:ComboBox id="_IDGenComboBox2" selectedKey="{ItemWeightUnit}" showSecondaryValues="true" enabled="{FreightUnitEditFlag}" required="true" items="{ path: '/C_Weightuom', templateShareable:false, sorter: { path: 'WeightUnit' } }">
+							<core:ListItem id="_IDGenListItem2" key="{WeightUnit}" text="{WeightUnit}" additionalText="{WeightUnit_Text}"/>
+						</m:ComboBox>
+					</m:HBox>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn11" width="7rem" sortProperty="ItemPackageQty" filterProperty="ItemPackageQty">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemPackageQty" , "leadingProperty":"ItemPackageQty"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel11" text="{i18n>packageQty}" required="true"/>
+				<t:template>
+					<m:HBox id="_IDGenHBox3">
+						<m:Input id="packageQtyId" value="{ItemPackageQty}" type="Number" editable="{FreightUnitEditFlag}" required="true"/>
+					</m:HBox>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn12" width="7rem" sortProperty="ItemPackagingMaterialType" filterProperty="ItemPackagingMaterialType">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemPackagingMaterialType" , "leadingProperty":"ItemPackagingMaterialType"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel12" text="{i18n>packageType}" required="true"/>
+				<t:template>
+					<m:ComboBox id="_IDGenComboBox3" selectedKey="{ItemPackagingMaterialType}" showSecondaryValues="true" enabled="{FreightUnitEditFlag}" items="{path: '/ZTM_I_PackagingMaterialTypeHV', templateShareable:false}" required="true">
+						<core:ListItem id="_IDGenListItem3" key="{PackagingMaterialType}" text="{PackagingMaterialType}" additionalText="{PackagingMaterialCategory}"/>
+					</m:ComboBox>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn13" width="7rem" sortProperty="ItemPackagingMaterialCategory" filterProperty="ItemPackagingMaterialCategory">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemPackagingMaterialCategory" , "leadingProperty":"ItemPackagingMaterialCategory"\}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel13" text="{i18n>packagingInfo}" required="true"/>
+				<t:template>
+					<m:Input id="packMatInfoId" value="{ItemPackagingMaterialCategory}" editable="{FreightUnitEditFlag}" required="true"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn14" width="11rem" sortProperty="PickupDate" filterProperty="PickupDate">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "PickupDate" , "leadingProperty":"PickupDate"\}'/>
+				</t:customData>
+				<m:Label id="idLabPickup" text="{i18n>pickupdate}({oPOModel>/nLabPickUpDate})" required="true"/>
+				<t:template>
+					<m:DatePicker id="pickUpDateId" editable="{FreightUnitEditFlag}" value="{path: 'PickupDate', type: 'sap.ui.model.type.DateTime', formatOptions: {'pattern': 'MM/dd/yyyy HH:mm'}}" required="true"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="idPickupLocCol" width="9rem" sortProperty="ItemPickupLocation" filterProperty="ItemPickupLocation">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemPickupLocation", "leadingProperty": "ItemPickupLocation"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel14" text="{i18n>pickupLoc}" required="true"/>
+				<t:template>
+					<m:Select id="_IDGenSelect1" enabled="{FreightUnitEditFlag}" editable="{FreightUnitEditFlag}" selectedKey="{ItemPickupLocation}" items="{path: 'to_PickupLocation', templateShareable:false, sorter: { path: 'LocationDescription' } }">
+						<core:Item id="_IDGenItem1" key="{PickupLocation}" text="{LocationDescription}"/>
+					</m:Select>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn15" width="18rem" sortProperty="DestinationLocationDescr" filterProperty="DestinationLocationDescr">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "DestinationLocationDescr", "leadingProperty": "DestinationLocationDescr"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel15" text="{i18n>destinationLoc}"/>
+				<t:template>
+					<m:Text id="_IDGenText8" text="{parts: [{path: 'DestinationHouseNumber'}, {path: 'DestinationStreetName'}, {path: 'DestinationCityName'}, {path: 'DestinationLocationDescr'}, {path: 'DestinationCountry'}], formatter:'.getDestinationLoc'}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn16" width="10rem" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "DeliveryDate", "leadingProperty": "DeliveryDate"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel16" text="{i18n>destinationDate}({oPOModel>/nLabPickUpDate})"/>
+				<t:template>
+					<m:Text id="_IDGenText6" text="{path: 'DeliveryDate', type: 'sap.ui.model.type.DateTime',formatOptions: {'pattern': 'MM/dd/yyyy HH:mm'}}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn6" width="8rem" sortProperty="FreightOrderID" filterProperty="FreightOrderID">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "FreightOrderID", "leadingProperty": "FreightOrderID"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel6" text="{i18n>FreightOrderLabel}"/>
+				<t:template>
+					<m:HBox id="_IDGenHBox4">
+						<m:Button id="idSupplierDetails" icon="sap-icon://supplier" press="onSupplierPress" tooltip="{i18n>supplierDetails}" enabled="{FreightUnitEditFlag}"/>
+						<m:ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<m:ToolbarSeparator id="_IDGenToolbarSeparator2"></m:ToolbarSeparator>
+						<m:ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+						<m:Text id="_IDGenText9" text="{FreightOrderID}"/>
+					</m:HBox>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn17" width="6rem" sortProperty="ProductID" filterProperty="ProductID">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ProductID", "leadingProperty": "ProductID"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel17" text="{i18n>productId}"/>
+				<t:template>
+					<m:Text id="_IDGenText10" text="{ProductID}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn5" width="7rem" sortProperty="FreightUnitID" filterProperty="FreightUnitID">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "FreightUnitID", "leadingProperty": "FreightUnitID"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel5" text="{i18n>fuItmNum}"/>
+				<t:template>
+					<m:Text id="_IDGenText5" text="{FreightUnitID}"/>
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn18" width="5rem" sortProperty="FreightUnitPlanningBlock" filterProperty="FreightUnitPlanningBlock" hAlign="Center">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "FreightUnitPlanningBlock", "leadingProperty": "FreightUnitPlanningBlock"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel18" text="{i18n>fuBlockStatus}"/>
+				<t:template>
+					<m:ObjectStatus id="_IDGenObjectStatus1" state="{path: 'FreightUnitPlanningBlock', formatter:'.getPlanningStatusState'}" icon="{path: 'FreightUnitPlanningBlock', formatter:'.getPlanningStatusIcon'}" />
+				</t:template>
+			</t:Column>
+			<t:Column id="_IDGenColumn2" width="5rem" sortProperty="ItemID" filterProperty="ItemID" hAlign="Center">
+				<t:customData>
+					<core:CustomData key="p13nData" value='\{"columnKey": "ItemID", "leadingProperty": "ItemID"}'/>
+				</t:customData>
+				<m:Label id="_IDGenLabel2" text="{i18n>fuItemNum}"/>
+				<t:template>
+					<m:Text id="_IDGenText1" text="{ItemID}"/>
+				</t:template>
+			</t:Column>
+		</t:columns>
+	</t:Table>
+</core:FragmentDefinition>

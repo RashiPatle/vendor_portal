@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="similarUnitsId" title="{i18n>unitDetails}">
+		<f:SimpleForm editable="true" id="form0" layout="ColumnLayout">
+			<f:content>
+				<!-- <core:Title text="" id="title0"/> -->
+				<Label id="_IDGenLabel1" text="{i18n>dimensions}"/>
+				<Input width="100%" id="lengthId" type="Number" value="" required="true"/>
+				<Input width="100%" id="widthId" type="Number" value="" required="true"/>
+				<Input width="100%" id="heightId" type="Number" value="" required="true"/>
+				<ComboBox id="dimensionsUnitId" showSecondaryValues="true" enabled="{FreightUnitEditFlag}" required="true" items="{ path: '/C_ProductLengthUoMVH', sorter: { path: 'UnitOfMeasure' } }">
+				<core:ListItem key="{UnitOfMeasure}" text="{UnitOfMeasure}" additionalText="{UnitOfMeasure_Text}"/>
+			    </ComboBox>
+				<Label id="_IDGenLabel2" text="{i18n>weight}"/>
+				<Input width="100%" id="weightId" type="Number" value="" required="true"/>
+				<ComboBox id="weightUnitId" showSecondaryValues="true" enabled="{FreightUnitEditFlag}" required="true" items="{ path: '/C_Weightuom', sorter: { path: 'WeightUnit' } }">
+				<core:ListItem key="{WeightUnit}" text="{WeightUnit}" additionalText="{WeightUnit_Text}"/>
+			    </ComboBox>
+				<Label id="_IDGenLabel3" text="{i18n>packageQty}"/>
+				<Input width="100%" id="quantitylId" type="Number" value=""/>
+			</f:content>
+		</f:SimpleForm>
+		<beginButton>
+			<Button id="_IDGenButton1" text="{i18n>accept}" type="Accept" press="onPressSaveUnits"/>
+		</beginButton>
+		<endButton>
+			<Button id="_IDGenButton2" text="{i18n>reject}" type="Reject" press="onPressCancelUnit"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

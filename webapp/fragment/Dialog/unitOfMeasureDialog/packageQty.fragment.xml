@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m" height="100%">
+	<SelectDialog noDataText="No Records Found" title="Select Unit Of Measure" items="{ path : '/ZTM_C_QuantityUoM' }"
+		confirm="onUnitOfMeasuresConfirm" cancel="handleQuantityValueHelpCancel" search="_handleUnitOfMeasureSearch" growingThreshold='10'
+		contentWidth="50px" contentHeight="250px">
+		<StandardListItem title="{UnitOfMeasure}" description="{UnitOfMeasure_Text}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

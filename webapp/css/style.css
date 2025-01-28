@@ -1,0 +1,9 @@
+/* Enter your custom styles here */
+
+[data-iconcolor="green"] {
+    color: green;
+}
+
+[data-iconcolor="yellow"] {
+    color: yellow;
+}

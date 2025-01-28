@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:CD="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+<Dialog contentWidth="650px" contentHeight="300px" draggable="true" resizable="true" horizontalScrolling="false" id="idDialogSplitQty" title="{i18n>splitQuantity}" type="Standard">
+    <content>
+        <l:VerticalLayout width="100%" id="layout0">
+            <l:content>
+                <form:SimpleForm editable="false" layout="ColumnLayout">
+			            <form:content>
+                            <Label text="{i18n>purchaseOrder}" design="Bold"/>
+                            <Text text="{PurchaseOrder}"/>
+                            <Label text="{i18n>fuItemNum}" design="Bold"/>
+                            <Text text="{ItemID}"/>
+                            <Label text="{i18n>fuItmNum}" design="Bold"/>
+                            <Text text="{FreightUnitID}"/>
+                            <Label text="{i18n>productDesc}" design="Bold"/>
+                            <Text text="{ProductName}"/>
+                            <Label text="{i18n>quantity}" design="Bold"/>
+                            <ObjectNumber number="{ItemQuantity}" unit="{ItemQuantityUnit}" state="Information"/>   
+						</form:content>
+                </form:SimpleForm>
+            </l:content>
+        </l:VerticalLayout>
+        <l:VerticalLayout width="100%" id="layout1">
+            <l:content>
+            <form:SimpleForm editable="true" layout="ColumnLayout">
+                <form:content>
+                    <core:Title text="{i18n>splitQuantity}"/>
+			        <Label text="{i18n>quantity}" design="Bold"/>
+                    <Input id="splitQtyId" value="" description="{ItemQuantityUnit}" type="Number" required="true" liveChange = "onLiveChangeSplitQty"/>
+                    <!-- <Input id="splitQtyUnitId" value="{ItemQuantityUnit}" showValueHelp="true" valueHelpRequest="onSearchUnitOfMeasure" valueHelpOnly="true" required="true"> -->
+							<!-- <layoutData> -->
+								<!-- <form:ColumnElementData cellsSmall="3" cellsLarge="3"/> -->
+							<!-- </layoutData> -->
+						<!-- </Input>     -->
+                </form:content>
+            </form:SimpleForm>
+            </l:content>
+        </l:VerticalLayout>
+    </content>
+    <buttons>
+        <Button id="idButtonCancel" press="onSplitQtyCancelClick" text="{i18n>reject}" type="Reject"/>
+        <Button id="idButtonAccept" press="onSplitQtyAcceptClick" text="{i18n>accept}" type="Accept" enabled="false"/>
+    </buttons>
+</Dialog>
+</core:FragmentDefinition>
