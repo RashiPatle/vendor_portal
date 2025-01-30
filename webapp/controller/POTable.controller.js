@@ -7,25 +7,31 @@ sap.ui.define([
     "sap/m/Dialog",
     "sap/m/Button",
     "sap/ui/model/FilterOperator",
+    "sap/ui/model/json/JSONModel"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, BaseController, Filter, MessageBox, MessageToast, Dialog, Button, FilterOperator) {
+    function (Controller, BaseController, Filter, MessageBox, MessageToast, Dialog, Button, FilterOperator,JSONModel) {
         "use strict";
         var oTable;
         return BaseController.extend("ui.tm.vps.ztmvpsintutive.controller.POTable", {
-            onInit: function () {
-                this._oCustomSelect = this.byId("customSelect");
-                // RSR - PO Details Model to store all requried data //
-                this._oPOModel = this.getOwnerComponent().getModel("oPOModel");
-                //RSR - Setting up default delivery date
-                var cDate = new Date();
-                this.oDefaultDate = new Date(cDate.setDate(cDate.getDate() - 5));
-                //RSR - Get the Timezone to set on the Table Header
-                var lTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+)/)[1];
-                // this._oPOModel.setProperty("/nLabPickUpDate", lTimeZone)
-                //
+            // onInit: function () {
+            //     this._oCustomSelect = this.byId("customSelect");
+            //     // RSR - PO Details Model to store all requried data //
+            //     this._oPOModel = this.getOwnerComponent().getModel("oPOModel");
+            //     //RSR - Setting up default delivery date
+            //     var cDate = new Date();
+            //     this.oDefaultDate = new Date(cDate.setDate(cDate.getDate() - 5));
+            //     //RSR - Get the Timezone to set on the Table Header
+            //     var lTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+)/)[1];
+            //     // this._oPOModel.setProperty("/nLabPickUpDate", lTimeZone)
+            //     //
+            // },
+
+            onInit: function(){
+                const oModel = new JSONModel("/model/Product.json");
+                this.getView().setModel(oModel);
             },
 
             _getInitialPOTable: function () {
@@ -617,15 +623,15 @@ sap.ui.define([
                     );
                 }
             },
-            onAfterRendering: function (event) {
-                var defaultDeliverDate = this.getView().byId("filterDeliverDate");
-                var valueComp = {
-                    "operator": "GE",
-                    "low": this.oDefaultDate
-                };
-                // defaultDeliverDate.addDefaultFilterValue(new sap.ui.comp.smartfilterbar.SelectOption().setLow(this.oDefaultDate));
-                defaultDeliverDate.addDefaultFilterValue(new sap.ui.comp.smartfilterbar.SelectOption(valueComp));
-            },
+            // onAfterRendering: function (event) {
+            //     var defaultDeliverDate = this.getView().byId("filterDeliverDate");
+            //     var valueComp = {
+            //         "operator": "GE",
+            //         "low": this.oDefaultDate
+            //     };
+            //     // defaultDeliverDate.addDefaultFilterValue(new sap.ui.comp.smartfilterbar.SelectOption().setLow(this.oDefaultDate));
+            //     defaultDeliverDate.addDefaultFilterValue(new sap.ui.comp.smartfilterbar.SelectOption(valueComp));
+            // },
 
             onRefreshPress: function () {
                 this.byId("LineItemsSmartTable").rebindTable();

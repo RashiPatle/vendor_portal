@@ -14,17 +14,6 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.9.6",
       "toolsId": "149ae4e8-64e6-4562-a79d-64ae4af5649a"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "/sap/opu/odata/sap/ZTM_VP_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      }
     }
   },
   "sap.ui": {
@@ -69,8 +58,11 @@
         "settings": {
           "bundleName": "ui.tm.vps.ztmvpsintutive.i18n.i18n"
         }
+      },
+      "ProductModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "model/data.json"
       }
-     
     },
     "resources": {
       "css": [

@@ -1,5 +1,6 @@
 <mvc:View controllerName="ui.tm.vps.ztmvpsintutive.controller.POTable"
-	xmlns="sap.f"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:m="sap.m"
@@ -9,56 +10,62 @@
 	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<m:Page showHeader="false" enableScrolling="false">
 		<m:VBox fitContainer="true">
-			<!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" liveMode="false">
-				<smartFilterBar:controlConfiguration>
-					<smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration1" key="PurchaseOrder" label="{i18n>PurchaseOrderLabel}" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration4" key="FreightOrderID" label="{i18n>FreightOrderLabel}" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration5" key="PickupDate" label="{i18n>PickUpLabel}" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration key="FreightUnitPlanningBlock" label="{i18n>fuBlockStatus}" visibleInAdvancedArea="true">
-						<smartFilterBar:customControl>
-							<m:Select id="customSelect" customData:hasValue="true" width="300px" showSecondaryValues= "true">
-								<core:ListItem additionalText="Reset"/>
-								<core:ListItem key="false" text="UnBlocked" icon="sap-icon://sys-enter-2"/>
-								<core:ListItem key="true" text="Blocked" icon="sap-icon://error"/>
-							</m:Select>
-						</smartFilterBar:customControl>
-					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration id="filterDeliverDate" key="DeliveryDate" label="{i18n>destinationDate}" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
-				</smartFilterBar:controlConfiguration>
-				layout data used to make the table growing but the filter bar fixed
-				<smartFilterBar:layoutData>
-					<m:FlexItemData id="_IDGenFlexItemData1" shrinkFactor="0"/>
-				</smartFilterBar:layoutData>
-			</smartFilterBar:SmartFilterBar> -->
-				<smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey"
-			considerSelectionVariants="true" entitySet="LineItemsSet" useDateRangeType="true">
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration key="BUDAT" visibleInAdvancedArea="true"
-				 conditionType="{
-						defaultOperation: 'TODAY'}">
-				</smartFilterBar:ControlConfiguration>
-				<smartFilterBar:ControlConfiguration key="CREATION_DATE" visibleInAdvancedArea="true"
-				 conditionType="{
-						defaultOperation: 'TODAY'
-					}">
-				</smartFilterBar:ControlConfiguration>
-				<smartFilterBar:ControlConfiguration key="CLOSE_DATE" visibleInAdvancedArea="true" />
-
-			</smartFilterBar:controlConfiguration>
-
-			<!-- layout data used to make the table growing but the filter bar fixed -->
-			<smartFilterBar:layoutData>
-				<FlexItemData shrinkFactor="0"/>
-			</smartFilterBar:layoutData>
-		</smartFilterBar:SmartFilterBar>
-			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="ZTM_C_VendorFreightUnits" smartFilterId="smartFilterBar" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" useVariantManagement="true" useTablePersonalisation="true" placeToolbarInTable="true" header="{i18n>PurchaseOrderLabel}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" showFullScreenButton="true" ignoreFromPersonalisation="FreightUnitUUID,FreightOrderUUID,TransportationOrderItemUUID,FreightUnitEditFlag,ItemPackageQtyUni,FreightOrderTranspServiceLevel,FreightOrderCarrier,PreviousCarrier,DestinationCityName,DestinationCountry,FreightUnitDGOIndicator,DangerousGoodsIndicator,DangerousGoodsIndicatorIcon,SourceStopDepartedEvent,DestinationStopDepartedEvent,FreightUnitDGOIndicatorIcon,MonetaryValue,ItemValueCrcy,MonetaryValueCrcy,ItemHeight,DestinationHouseNumber,ItemVolume,ItemVolumeUnit,ItemWeightUnit,ItemQuantityUnit,ItemValue,FOSourceStopUUID,FODestinationStopUUID,
-				FreightOrderParcelTrackingID,SpecialInstructions,DestinationStreetName,ItemTrackingNumber,ItemLengthUnit,ItemWidth" requestAtLeastFields="PurchaseOrder,FreightOrderUUID,FreightUnitEditFlag,TransportationOrderItemUUID,FreightUnitUUID, ItemQuantity, ItemQuantityUnit,PickupDate,DeliveryDate,ItemTrackingNumber,ItemPackagingMaterialType,ItemPackagingMaterialCategory,ItemPackageQty,
-		   ItemPackageQtyUni,ItemLength,ItemWidth,ItemHeight,ItemLengthUnit,ItemVolume,ItemVolumeUnit,ItemWeight,ItemWeightUnit,ItemPickupLocation,DestinationLocationDescr,DestinationHouseNumber,DestinationStreetName,DestinationCityName,
-		   DestinationCountry,ProductID,FreightOrderID,FreightUnitID,PreviousCarrierName,PreviousCarrier,FreightUnitPlanningBlock,ItemID,SupplierName,SupplierContact,SupplierNumber,SourceStopDepartedEvent,DestinationStopDepartedEvent" demandPopin="false">
+			<m:items>
+				<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+					<fb:filterItems>
+						<fb:FilterItem name="Name" label="{i18n>PurchaseOrderLabel}">
+							<fb:control>
+								<m:MultiComboBox name="Name" selectionChange=".onSelectionChange" items="{
+												path: '/ProductNames',
+												templateShareable: true
+											}">
+									<core:Item key="{key}" text="{name}"/>
+								</m:MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+						<fb:FilterItem name="Category" label="{i18n>FreightOrderLabel}">
+							<fb:control>
+								<m:MultiComboBox name="Category" selectionChange=".onSelectionChange" items="{
+												path: '/ProductCategories',
+												templateShareable: true
+											}">
+									<core:Item key="{key}" text="{name}"/>
+								</m:MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+						<fb:FilterItem name="SupplierName" label="{i18n>PickUpLabel}">
+							<fb:control>
+								<m:MultiComboBox name="SupplierName" selectionChange=".onSelectionChange" items="{
+												path: '/ProductSuppliers',
+												templateShareable: true
+											}">
+									<core:Item key="{key}" text="{name}"/>
+								</m:MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+						<fb:FilterItem name="Status" label="{i18n>fuBlockStatus}">
+							<fb:control>
+								<m:MultiComboBox name="Status"></m:MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+						<fb:FilterItem name="Carrier" label="{i18n>CarrierLabel}">
+							<fb:control>
+								<m:MultiComboBox name="Carrier"></m:MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+					</fb:filterItems>
+				</fb:FilterBar>
+			</m:items>
+			<m:items>
+				<m:OverflowToolbar design="Transparent">
+					<m:Title id="title" text="{i18n>PurchaseOrderLabel}"/>
+					<m:ToolbarSpacer/>
+					<m:OverflowToolbarButton id="idAssignPO" icon="sap-icon://tree" tooltip="Assign Items" text="" press="onAssignPress" visible="true"/>
+					<m:OverflowToolbarButton id="idRefresh" icon="sap-icon://repost" tooltip="Refresh" text="" press="onRefreshPress" visible="true"/>
+				</m:OverflowToolbar>
+				<core:Fragment fragmentName="ui.tm.vps.ztmvpsintutive.fragment.tableExt" id="idFragmentPOtable" type="XML"/>
+			</m:items>
+			<!-- <smartTable:SmartTable id="LineItemsSmartTable" entitySet="ZTM_C_VendorFreightUnits" smartFilterId="smartFilterBar" tableType="Table" enableExport="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" useVariantManagement="true" useTablePersonalisation="true" placeToolbarInTable="true" header="{i18n>PurchaseOrderLabel}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" showFullScreenButton="true" demandPopin="false">
 				<smartTable:customToolbar>
 					<m:OverflowToolbar design="Transparent">
 						<m:ToolbarSpacer/>
@@ -67,11 +74,10 @@
 					</m:OverflowToolbar>
 				</smartTable:customToolbar>
 				<core:Fragment fragmentName="ui.tm.vps.ztmvpsintutive.fragment.tableExt" id="idFragmentPOtable" type="XML"/>
-				<!-- layout data used to make the table growing but the filter bar fixed -->
 				<smartTable:layoutData>
 					<m:FlexItemData id="_IDGenFlexItemData2" growFactor="1" baseSize="0%"/>
 				</smartTable:layoutData>
-			</smartTable:SmartTable>
+			</smartTable:SmartTable> -->
 		</m:VBox>
 		<m:footer>
 			<m:Toolbar id="toolbar2">

@@ -6,7 +6,7 @@
 	xmlns:t="sap.ui.table"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" core:require="{ DecimalFormat: 'ui/tm/vps/ztmvpsintutive/model/DecimalFormat' }">
-	<t:Table id="idPOTable" enableGrouping="true" selectionMode="Multi" visibleRowCountMode="Auto" enableColumnFreeze="true" rowSelectionChange="onRowSelect">
+	<t:Table id="idPOTable" rows="{/PackagingMaterial}" selectionMode="MultiToggle"  visibleRowCount="10">
 		<t:columns>
 			<t:Column id="_IDGenColumn7" width="4rem">
 				<t:customData>
@@ -14,31 +14,31 @@
 				</t:customData>
 				<m:Label id="_IDGenLabel7" text=""/>
 				<t:template>
-					<m:Button id="idSplitTable" icon="sap-icon://split" press="onSplitPress" tooltip="{i18n>split}" enabled="true"/>
+					<m:Button id="idSplitTable" icon="sap-icon://split" press="onSplitPress" tooltip="{i18n>split}" visible="true"/>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn1" width="7rem" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
-				<t:customData>
+			<t:Column id="_IDGenColumn1" width="7rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "PurchaseOrder" , "leadingProperty":"PurchaseOrder"\}'/>
-				</t:customData>
-				<m:Label id="_IDGenLabel1" text="{i18n>purchaseOrder}"/>
+				</t:customData> -->
+				<m:Label id="_IDGenLabel01" text="{i18n>purchaseOrder}"/>
 				<t:template>
 					<m:ObjectIdentifier id="_IDGenObjectIdentifier1" title="{PurchaseOrder}"/>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn8" width="20rem" sortProperty="ProductName" filterProperty="ProductName">
-				<t:customData>
+			<t:Column id="_IDGenColumn8" width="20rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "ProductName" , "leadingProperty":"ProductName"\}'/>
-				</t:customData>
+				</t:customData> -->
 				<m:Label id="_IDGenLabel8" text="{i18n>productDesc}"/>
 				<t:template>
 					<m:Text id="_IDGenText7" text="{ProductName}"/>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn4" width="5rem" sortProperty="ItemQuantity" filterProperty="ItemQuantity" hAlign="Center">
-				<t:customData>
+			<t:Column id="_IDGenColumn4" width="5rem" hAlign="Center">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "ItemQuantity" , "leadingProperty":"ItemQuantity"\}'/>
-				</t:customData>
+				</t:customData> -->
 				<m:Label id="_IDGenLabel4" text="{i18n>quantity}"/>
 				<t:template>
 					<m:ObjectNumber id="_IDGenObjectNumber1" number="{ItemQuantity}" unit="{ItemQuantityUnit}"/>
@@ -106,10 +106,10 @@
 				</t:template>
 			</t:Column>
 			<t:Column id="_IDGenColumn14" width="11rem" sortProperty="PickupDate" filterProperty="PickupDate">
-				<t:customData>
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "PickupDate" , "leadingProperty":"PickupDate"\}'/>
-				</t:customData>
-				<m:Label id="idLabPickup" text="{i18n>pickupdate}({oPOModel>/nLabPickUpDate})" required="true"/>
+				</t:customData> -->
+				<m:Label id="idLabPickup" text="{i18n>pickupdate}" required="true"/>
 				<t:template>
 					<m:DatePicker id="pickUpDateId" editable="{FreightUnitEditFlag}" value="{path: 'PickupDate', type: 'sap.ui.model.type.DateTime', formatOptions: {'pattern': 'MM/dd/yyyy HH:mm'}}" required="true"/>
 				</t:template>
@@ -125,28 +125,28 @@
 					</m:Select>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn15" width="18rem" sortProperty="DestinationLocationDescr" filterProperty="DestinationLocationDescr">
-				<t:customData>
+			<t:Column id="_IDGenColumn15" width="18rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "DestinationLocationDescr", "leadingProperty": "DestinationLocationDescr"}'/>
-				</t:customData>
+				</t:customData> -->
 				<m:Label id="_IDGenLabel15" text="{i18n>destinationLoc}"/>
 				<t:template>
-					<m:Text id="_IDGenText8" text="{parts: [{path: 'DestinationHouseNumber'}, {path: 'DestinationStreetName'}, {path: 'DestinationCityName'}, {path: 'DestinationLocationDescr'}, {path: 'DestinationCountry'}], formatter:'.getDestinationLoc'}"/>
+					<m:Text id="_IDGenText8" text="{DestinationHouseNumber}"/>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn16" width="10rem" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
-				<t:customData>
+			<t:Column id="_IDGenColumn16" width="10rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "DeliveryDate", "leadingProperty": "DeliveryDate"}'/>
-				</t:customData>
-				<m:Label id="_IDGenLabel16" text="{i18n>destinationDate}({oPOModel>/nLabPickUpDate})"/>
+				</t:customData> -->
+				<m:Label id="_IDGenLabel16" text="{i18n>destinationDate}"/>
 				<t:template>
-					<m:Text id="_IDGenText6" text="{path: 'DeliveryDate', type: 'sap.ui.model.type.DateTime',formatOptions: {'pattern': 'MM/dd/yyyy HH:mm'}}"/>
+					<m:Text id="_IDGenText6" text="{DeliveryDate}"/>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn6" width="8rem" sortProperty="FreightOrderID" filterProperty="FreightOrderID">
-				<t:customData>
+			<t:Column id="_IDGenColumn6" width="8rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "FreightOrderID", "leadingProperty": "FreightOrderID"}'/>
-				</t:customData>
+				</t:customData> -->
 				<m:Label id="_IDGenLabel6" text="{i18n>FreightOrderLabel}"/>
 				<t:template>
 					<m:HBox id="_IDGenHBox4">
@@ -158,10 +158,10 @@
 					</m:HBox>
 				</t:template>
 			</t:Column>
-			<t:Column id="_IDGenColumn17" width="6rem" sortProperty="ProductID" filterProperty="ProductID">
-				<t:customData>
+			<t:Column id="_IDGenColumn17" width="6rem">
+				<!-- <t:customData>
 					<core:CustomData key="p13nData" value='\{"columnKey": "ProductID", "leadingProperty": "ProductID"}'/>
-				</t:customData>
+				</t:customData> -->
 				<m:Label id="_IDGenLabel17" text="{i18n>productId}"/>
 				<t:template>
 					<m:Text id="_IDGenText10" text="{ProductID}"/>
